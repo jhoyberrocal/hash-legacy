@@ -1,0 +1,9 @@
+tmp
+node_modules
+.idea
+db
+dist
+.cache
+.vscode
+package-lock.json
+public/media

@@ -1,0 +1,11 @@
+.modal(:class="file.open ? 'is-active' : ''" :key="file.name")
+    .modal-background(@click="closeFile")
+    .modal-content.has-background-grey-dark(v-if="file.open")
+        p.has-text-centered(v-if="file.ext === 'jpg' || file.ext === 'png' || file.ext === 'jpeg' || file.ext === 'JPG' || file.ext === 'PNG'")
+            img.video-modal.center.mx-w(:src="`/data/${file.name}`")
+        p.has-text-centered(v-else-if="file.ext === 'mp4' || file.ext === 'MP4' || file.ext === 'avi'")
+            video.video-modal.center.mx-w(controls, loop, autoplay)
+                source(:src="`/data/${file.name}`")
+        p.has-text-centered
+            button.button.is-primary(type="button" @click="changeFile(file.idx, 1)") P
+            button.button.is-primary(type="button" @click="changeFile(file.idx, 2)") N

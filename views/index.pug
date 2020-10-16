@@ -1,0 +1,43 @@
+html
+    head
+        include head
+    body
+        #app
+            include progress
+            .columns(style="margin: 0")
+                .column(style="padding: 0")
+                    img.image.is-128x128(src="/logo.svg", style="margin: auto")
+            .hero.is-light
+                .hero-body
+                    .container
+                        .columns
+                            .column.is-3
+                                input.input(type="password", v-model="password")
+                            .column.is-4
+                                .file.has-name.is-fullwidth
+                                    label.file-label
+                                        input.file-input(:disabled="uploader !== 0" type="file", @change="handleFile")
+                                        span.file-cta
+                                            span.file-label
+                                                | Choose a file…
+                                        span.file-name(v-if="file.name") {{file.name}}
+                                p(v-if="uploader === 0") Listo para subir
+                                p(v-if="uploader === 1") Subiendo
+                                p(v-if="uploader === 2") Terminado
+                        .columns
+                            .column
+                                button.button.is-primary(type="button", @click="e => desc('All', 2)") All
+            .container
+                .columns
+                    .column.is-half
+                        table.table.is-bordered.is-fullwidth
+                            tr(v-for="i in lib")
+                                td
+                                    p.c-pointer(@click="e => desc(i, 1)") {{i}}
+                    .column
+                        table.table.is-bordered.is-fullwidth(v-if="dist.length")
+                            tr(v-for="(i, idx) in dist")
+                                td
+                                    p.c-pointer(@click="e => openFile(i, idx)") {{i}}
+            include modal
+        script(src="/main.js")
